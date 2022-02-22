@@ -1,5 +1,7 @@
+// rps-ui
 let playerScore = 0;
 let computerScore = 0;
+const buttons = document.querySelectorAll('input')
 
 function computerPlay() {
     let compPick = ['rock', 'paper', 'scissors'];
@@ -7,32 +9,28 @@ function computerPlay() {
     return compPick[compPick2];
 }
 
-function playRound() {
-    let player = prompt('What do you choose?').toLowerCase();
-    let computer = computerPlay();
+function playRound(playerSelection) {
+    // let player = prompt('What do you choose?').toLowerCase();
+    let computerSelection = computerPlay();
+    let result = '';
 
-    if (player === 'rock' && computer === 'paper') {
-        console.log('COMPUTER WINS!');
-        console.log(`Computer has ${computerScore += 1} PTS`);
-    }else if (player === 'paper' && computer === 'rock') {
-        console.log('PLAYER WINS!');
-        console.log(`Human player has ${playerScore += 1} PTS!`);
+    if (playerSelection === 'rock' && computerSelection === 'paper') {
+        result = `COMPUTER WON THIS ROUND ${computerScore += 1} PTS!`;
 
-    }else if (player === 'rock' && computer === 'scissors') {
-        console.log('PLAYER WINS!');
-        console.log(`Human player has ${playerScore += 1} PTS!`);
+    }else if (playerSelection === 'paper' && computerSelection === 'rock') {
+        result = `PLAYER WON THIS ROUND ${playerScore += 1} PTS!`;
 
-    }else if (player === 'scissors' && computer === 'rock') {
-        console.log('COMPUTER WINS!');
-        console.log(`Computer has ${computerScore += 1} PTS!`);
+    }else if (playerSelection === 'rock' && computerSelection === 'scissors') {
+        result = `PLAYER WON THIS ROUND ${playerScore += 1} PTS!`;
 
-    }else if (player === 'paper' && computer === 'scissors') {
-        console.log('COMPUTER WINS!');
-        console.log(`Computer has ${computerScore += 1} PTS!`);
+    }else if (playerSelection === 'scissors' && computerSelection === 'rock') {
+        result = `COMPUTER WON THIS ROUND ${computerScore += 1} PTS!`;
 
-    }else if (player === 'scissors' && computer === 'paper') {
-        console.log('PLAYER WINS!');
-        console.log(`Human player has ${playerScore += 1} PTS!`);
+    }else if (playerSelection === 'paper' && computerSelection === 'scissors') {
+        result = `COMPUTER WON THIS ROUND ${computerScore += 1} PTS!`;
+
+    }else if (playerSelection === 'scissors' && computerSelection === 'paper') {
+        result = `PLAYER WON THIS ROUND ${playerScore += 1} PTS!`;
     }
 
     if (playerScore >= 3) {
@@ -40,12 +38,19 @@ function playRound() {
     }else if (computerScore >= 3) {
         alert('COMPUTER HAS WON THE GAME!!!');
     }
-    
+    document.getElementById('result').innerHTML = result;
+    return
 
 }
 
-function game() {
-    for (i = 1; playerScore < 3 && computerScore < 3; i++) {
-        playRound();
-}
-}
+// function game() {
+//     for (i = 1; playerScore < 3 && computerScore < 3; i++) {
+//         playRound();
+//  }
+// }
+
+buttons.forEach(button =>{
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+})
